@@ -13,8 +13,11 @@ $(document).ready(function(){
 			$('#ask a').click();
 		}
 	})
-	// join on click
-	$('#ask a').click(function() {
+  // join on click
+  $('#ask .event').click(function() {
+    socket.emit('message', $.toJSON({ message: 'hello world' }));
+  });
+	$('#ask .join').click(function() {
 		join($('#ask input').val());
 		$('#ask').hide();
 		$('#channel').show();
@@ -183,7 +186,7 @@ $(document).ready(function(){
 </head>
 <body>
   <div id="ask" class="bordered" style="display: none;">
-    Name: <input type="text" id="name" /> <a href="#"><span class="join">Join!</span></a>
+    Name: <input type="text" id="name" /> <a href="#"><span class="join">Join!</span></a><a href="#"><span class="event">Event!</span></a>
   </div>
   <div id="channel" class="bordered" style="display: none;">
     <div id="descr" class="bordered">

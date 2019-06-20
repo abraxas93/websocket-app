@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/abraxas93/websocket-app#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "socket.io": "^2.2.0"
   }
 }

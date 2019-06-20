@@ -17,9 +17,12 @@ function handler(req, res) { // just return index.html
         });
 }
 
+
 io.sockets.on('connection', function (socket) { // handler for incoming connections
-    console.log(socket);
+    console.log(`Socket # ${socket.id} was connected`);
+    console.log(io.sockets.sockets);
     socket.on('chat', function (data) {
+        console.log('chat');
         var msg = JSON.parse(data);
         var reply = JSON.stringify({action: 'message', user: msg.user, msg: msg.msg });
         socket.emit('chat', reply);
@@ -27,9 +30,15 @@ io.sockets.on('connection', function (socket) { // handler for incoming connecti
     });
 
     socket.on('join', function(data) {
+        console.log('join');
         var msg = JSON.parse(data);
         var reply = JSON.stringify({action: 'control', user: msg.user, msg: ' joined the channel' });
         socket.emit('chat', reply);
         socket.broadcast.emit('chat', reply);
+    });
+
+    socket.on('disconnect', data => {
+        console.log(io.sockets.sockets);
+        console.log(`Socket # ${socket.id} was disconnected`);
     });
 });
