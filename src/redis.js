@@ -1,9 +1,6 @@
 
 import redis from 'redis';
 import promise from 'bluebird';
-import env from 'dotenv';
-
-env.config();
 
 promise.promisifyAll(redis.RedisClient.prototype);
 promise.promisifyAll(redis.Multi.prototype);
